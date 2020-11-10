@@ -70,5 +70,5 @@ def write_ini_chat_id(chat_id):
     config = configparser.ConfigParser()
     config.read("private_set.ini")
     config['Tlg']['chat_id'] = str(chat_id)
-    with open('settings.ini', 'w') as conf:
+    with open('private_set.ini', 'w') as conf:
         config.write(conf)

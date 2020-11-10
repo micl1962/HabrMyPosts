@@ -13,7 +13,11 @@ class HabrMyPostsBl():
         return cls.instance
 
     def __init__(self):
-        interval = self.get_interval()
+        if self.get_interval() == 0:
+            if messageBoxes.show_message_dialog('Critical', get_key(configTools.get_env_name(), 'ERROR_BAD_INI_FILE'), 'Внимание!'):
+                configTools.create_new_config()
+            else:
+                exit(1)
         self.sound_Notification = soundNotification.get_sound_notification()  # чтобы каждый раз не лазить в ini
         self.tlg_notifications = configTools.get_tlg_notification()
         self.hp = HabrParser.HabrParser()       # инъекция парсера (((
@@ -21,7 +25,9 @@ class HabrMyPostsBl():
     def get_interval(self):
         interval = configTools.get_interval()
         if interval == 0:  # что-то с конфигурационником
-            if messageBoxes.show_message_dialog('Critical', get_key('my_env.env', 'ERROR_BAD_INI_FILE'), 'Внимание!'):
+            if messageBoxes.show_message_dialog('Critical', ' Файл settings.ini не найден или поврежден!\n'
+                                                            'Желаете его создать?\n'
+                                                            'Отказ - выход из программы', 'Внимание!'):
                 configTools.create_new_config()
                 interval = 3*1000*60
             else:

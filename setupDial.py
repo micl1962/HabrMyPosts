@@ -97,9 +97,9 @@ class SetupDialog(QtWidgets.QDialog):
         self.pushButton.setText("->")
         self.groupBox.setTitle("Доп. настройки")
         self.labelSound.setText("Озвучивать свежий пост")
+        self.pushButtonSound.setText("Настроить")
         self.checkBoxTlg.setText\
             ("Уведомлять Телеграм-ботом - необходио указать\napi токен ( параметр в private_set.ini )")
-        self.pushButtonSound.setText("Настроить")
 
     def fill_settings(self):
         # все теги
